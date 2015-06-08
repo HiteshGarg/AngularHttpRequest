@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="ShopAndEarn">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<header>
+		<h1>ShopAndEarn</h1>
+	</header>
+	<section>
+		<div ng-controller="Categories">
+			<ul>
+				<li ng-repeat="category in kategories">{{category}}</li>
+			</ul>
+		</div>
+	</section>
+	<footer> </footer>
+	<!-- API resources -->
+<script src="https://code.angularjs.org/1.4.0/angular.min.js"></script>
+	<script src="https://code.angularjs.org/1.4.0/angular-route.min.js"></script>
+
+	<!-- App Resources -->
+<!-- 	<script src="js/app.js"></script>
+	<script src="js/controllers.js"></script> -->
+	<script>
+	var shopAndEarn = angular.module("ShopAndEarn", [ 'ngRoute' ]);
+	shopAndEarn.controller("Categories",function($scope,$http) {
+		$scope.categories =[];
+		$http.post("https://affiliate-api.flipkart.net/affiliate/api/hiteshkum2.json")
+				.success(function(data, status, headers, config) {
+			$scope.categories = data;
+		}).error(function(data, status, headers, config) {
+			console.log("failed procedure");
+		});
+	});
+	</script>
+</body>
+</html>
